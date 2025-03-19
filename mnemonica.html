@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mnemonica Stack Trainer</title>
+    
+    <!-- PWA Metadata -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mnemonica Trainer">
+    <meta name="application-name" content="Mnemonica Trainer">
+    <meta name="theme-color" content="#3498db">
+    <meta name="description" content="A training app for learning the Mnemonica Stack for card magic">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk1uZW1vbmljYSBTdGFjayBUcmFpbmVyIiwKICAic2hvcnRfbmFtZSI6ICJNZW1vcnkgU3RhY2siLAogICJkZXNjcmlwdGlvbiI6ICJBIHRyYWluaW5nIGFwcCBmb3IgbGVhcm5pbmcgdGhlIE1uZW1vbmljYSBTdGFjayBmb3IgY2FyZCBtYWdpYyIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0Nzdmcgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyBmaWxsPSdub25lJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnJTNFJTNDcmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgcng9JzY0JyBmaWxsPSclMjMzNDk4ZGInLyUzRSUzQ3BhdGggZD0nTTEyOCAxMjhIMzg0VjM4NEgxMjhWMTI4WicgZmlsbD0nd2hpdGUnIHN0cm9rZT0nJTIzMmM4NWM2JyBzdHJva2Utd2lkdGg9JzgnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PScyNTYnIGZvbnQtc2l6ZT0nOTYnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZmlsbD0nJTIzMmM4NWM2JyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkeT0nMzYnJTNFTSUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSIKICAgIH0KICBdLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y1ZjVmNSIsCiAgInRoZW1lX2NvbG9yIjogIiMzNDk4ZGIiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIKfQ==">
+
+    <!-- PWA Icons -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='512' height='512' rx='64' fill='%233498db'/%3E%3Cpath d='M128 128H384V384H128V128Z' fill='white' stroke='%232c85c6' stroke-width='8'/%3E%3Ctext x='256' y='256' font-size='96' font-family='Arial, sans-serif' fill='%232c85c6' text-anchor='middle' dy='36'%3EM%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='180' height='180' rx='45' fill='%233498db'/%3E%3Cpath d='M45 45H135V135H45V45Z' fill='white' stroke='%232c85c6' stroke-width='4'/%3E%3Ctext x='90' y='90' font-size='36' font-family='Arial, sans-serif' fill='%232c85c6' text-anchor='middle' dy='13'%3EM%3C/text%3E%3C/svg%3E">
+    
+    <!-- Apple Touch Startup Image -->
+    <link rel="apple-touch-startup-image" href="data:image/svg+xml,%3Csvg width='2048' height='2732' viewBox='0 0 2048 2732' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='2048' height='2732' fill='%23f5f5f5'/%3E%3Crect x='674' y='1216' width='700' height='300' rx='20' fill='%233498db'/%3E%3Ctext x='1024' y='1390' font-size='120' font-family='Arial, sans-serif' fill='white' text-anchor='middle'%3EMnemonica Trainer%3C/text%3E%3C/svg%3E" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f5f5f5;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none;
+        }
+        
+        /* PWA full-screen mode */
+        html.standalone {
+            height: 100%;
+        }
+        
+        html.standalone body {
+            height: 100%;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+        
+        /* Fix for iOS as installed app */
+        @supports (-webkit-touch-callout: none) {
+            html.standalone .container {
+                padding-bottom: 30px; /* Add extra padding for iOS installed app */
+            }
+            
+            html.standalone .stats {
+                margin-bottom: 20px; /* Add margin at the bottom */
+            }
+        }
+        
+        html.standalone .container {
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        html.standalone .quiz-container {
+            flex: 1;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 15px;
+            color: #7f8c8d;
+            white-space: nowrap;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        input, select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        
+        .quiz-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .card-display {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .card {
+            width: 90px;
+            height: 126px; /* Aspect ratio for playing cards */
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: #2c3e50;
+            border: 1px solid #ddd;
+        }
+        
+        .card.red {
+            color: #e74c3c;
+        }
+        
+        .card-value {
+            font-size: 36px;
+            line-height: 1;
+        }
+        
+        .card-suit {
+            font-size: 36px;
+            line-height: 1;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        
+        .question {
+            font-size: 18px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-width: 500px;
+            margin: 0 auto 5px;
+        }
+        
+        .option {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #f8f9fa;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .option.correct {
+            background-color: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .option.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .number-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            max-width: 180px;
+            margin: 5px auto 5px;
+        }
+        
+        .number-button {
+            width: 100%;
+            height: 40px;
+            padding: 0;
+            font-size: 18px;
+            border-radius: 6px;
+        }
+        
+        /* Position 10 button in the middle of bottom row */
+        .number-button[data-value="10"] {
+            grid-column: 2;
+        }
+        
+        .result {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 5px;
+            color: #2c3e50;
+            min-height: 0;
+            line-height: 1.2;
+        }
+        
+        .correct-message {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .incorrect-message {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            background-color: #f8f9fa;
+            padding: 8px;
+            padding-bottom: 20px; /* Added extra padding at bottom to push content up */
+            border-radius: 8px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .settings-panel {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .settings-label {
+            flex: 1;
+        }
+        
+        .settings-control {
+            flex: 2;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .stack-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .stack-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .stack-position {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+            text-align: right;
+        }
+        
+        .stack-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        
+        .card-mini {
+            width: 14px;
+            height: 14px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 5px;
+        }
+        
+        .card-mini.red {
+            color: #e74c3c;
+        }
+        
+        .timer-container {
+            text-align: center;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timer-bar {
+            height: 10px;
+            background-color: #3498db;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 10px;
+            transition: width 1s linear;
+        }
+        
+        .timer-bar.low-time {
+            background-color: #e74c3c;
+        }
+        
+        .timer-text {
+            font-size: 16px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .btn-toggle {
+            position: relative;
+            padding-left: 30px; /* Space for the toggle indicator */
+        }
+        
+        .btn-toggle.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-toggle.inactive {
+            background-color: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+        
+        .btn-toggle::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        
+        .btn-toggle.active::before {
+            background-color: white;
+        }
+        
+        .btn-toggle.inactive::before {
+            background-color: #3498db;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                width: 80px;
+                height: 112px;
+            }
+            
+            .card-value, .card-suit {
+                font-size: 30px;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .stack-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 375px) {
+            /* iPhone specific optimizations */
+            /* Make quiz container smaller to fit everything */
+            .quiz-container {
+                margin: 5px 0;
+            }
+            .card {
+                width: 70px;
+                height: 98px;
+            }
+            
+            .card-value, .card-suit {
+                font-size: 24px;
+            }
+            
+            .tabs {
+                padding-bottom: 5px;
+            }
+            
+            .tab {
+                padding: 5px 8px;
+                font-size: 14px;
+            }
+            
+            .stack-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 8px 5px;
+            }
+            
+            h1 {
+                margin-bottom: 5px;
+                font-size: 20px;
+            }
+            
+            .controls {
+                margin-bottom: 5px;
+                gap: 5px;
+            }
+            
+            button {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            
+            .result {
+                min-height: 0;
+                margin-top: 2px;
+                font-size: 13px;
+            }
+            
+            .stats {
+                margin-top: 5px;
+                padding: 4px;
+            }
+            
+            .stat-value {
+                font-size: 16px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+            }
+            
+            .number-button {
+                height: 35px;
+            }
+            
+            .question {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+            
+            .option {
+                padding: 6px;
+                margin-bottom: 2px;
+            }
+            
+            /* Already updated above */
+            
+            .options {
+                margin-bottom: 2px;
+            }
+        }
+    </style>
+    <script>
+        // Check if the page is loaded from the home screen
+        if (window.navigator.standalone) {
+            document.documentElement.classList.add('standalone');
+        }
+        
+        // Prevent pinch-zoom and other touch behaviors on iOS
+        document.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Prevent text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mnemonica Stack Trainer</h1>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="acaan">ACAAN Quiz</button>
+            <button class="tab" data-tab="space">Space Quiz</button>
+            <button class="tab" data-tab="stack">Stack Order</button>
+        </div>
+        
+        <div class="controls">
+            <button id="startBtn">New Question</button>
+            <button id="autoNextBtn" class="btn-toggle active">Auto-Next</button>
+            <button id="settingsBtn">Settings</button>
+        </div>
+        
+        <div class="settings-panel hidden" id="settingsPanel">
+            <h3>Settings</h3>
+            <div class="settings-row">
+                <div class="settings-label">Difficulty Level:</div>
+                <div class="settings-control">
+                    <select id="difficultyLevel">
+                        <option value="easy">Easy (no time limit)</option>
+                        <option value="medium" selected>Medium (20 sec)</option>
+                        <option value="hard">Hard (10 sec)</option>
+                        <option value="expert">Expert (5 sec)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-row">
+                <div class="settings-label">Space Quiz Range:</div>
+                <div class="settings-control">
+                    <input type="number" id="spaceRange" min="5" max="20" value="10">
+                    <div class="help-text">Maximum distance between cards</div>
+                </div>
+            </div>
+            
+            <div class="settings-row">
+                <div class="settings-label">Auto-Next Delay (seconds):</div>
+                <div class="settings-control">
+                    <input type="number" id="autoNextDelay" min="1" max="10" value="2">
+                </div>
+            </div>
+            
+            <button id="saveSettingsBtn">Save Settings</button>
+        </div>
+        
+        <!-- ACAAN Quiz -->
+        <div class="quiz-container" id="acaanQuiz">
+            <div class="timer-container hidden" id="acaanTimerContainer">
+                <span class="timer-text" id="acaanTimerText">20</span>
+                <div class="timer-bar" id="acaanTimerBar"></div>
+            </div>
+            
+            <div class="card-display">
+                <div>
+                    <div class="card" id="acaanCard">
+                        <svg width="100%" height="100%" viewBox="0 0 90 126" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="90" height="126" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                            <rect x="5" y="5" width="80" height="116" rx="4" fill="#3498db"/>
+                            <rect x="8" y="8" width="74" height="110" rx="3" fill="#154360"/>
+                            
+                            <!-- Card back pattern - centered vertically -->
+                            <path d="M45,21 L51,30 L45,39 L39,30 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,44 L51,53 L45,62 L39,53 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,67 L51,76 L45,85 L39,76 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,90 L51,99 L45,108 L39,99 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M27,32.5 L33,41.5 L27,50.5 L21,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,55.5 L33,64.5 L27,73.5 L21,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,78.5 L33,87.5 L27,96.5 L21,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M63,32.5 L69,41.5 L63,50.5 L57,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,55.5 L69,64.5 L63,73.5 L57,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,78.5 L69,87.5 L63,96.5 L57,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <!-- Border pattern -->
+                            <rect x="12" y="12" width="66" height="102" rx="2" fill="none" stroke="#3498db" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div id="acaanCardText" class="help-text">Ready to start</div>
+                </div>
+                <div>
+                    <div class="question">At position:</div>
+                    <div class="stat-value" id="acaanNumber">?</div>
+                </div>
+            </div>
+            
+            <div class="question">Which card do you need to cut to?</div>
+            
+            <div class="options" id="acaanOptions">
+                <div class="option" data-index="0">Option 1</div>
+                <div class="option" data-index="1">Option 2</div>
+                <div class="option" data-index="2">Option 3</div>
+                <div class="option" data-index="3">Option 4</div>
+            </div>
+            
+            <div class="result" id="acaanResult"></div>
+        </div>
+        
+        <!-- Space Quiz -->
+        <div class="quiz-container hidden" id="spaceQuiz">
+            <div class="timer-container hidden" id="spaceTimerContainer">
+                <span class="timer-text" id="spaceTimerText">20</span>
+                <div class="timer-bar" id="spaceTimerBar"></div>
+            </div>
+            
+            <div class="card-display">
+                <div>
+                    <div class="card" id="spaceCard1">
+                        <svg width="100%" height="100%" viewBox="0 0 90 126" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="90" height="126" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                            <rect x="5" y="5" width="80" height="116" rx="4" fill="#3498db"/>
+                            <rect x="8" y="8" width="74" height="110" rx="3" fill="#154360"/>
+                            
+                            <!-- Card back pattern - centered vertically -->
+                            <path d="M45,21 L51,30 L45,39 L39,30 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,44 L51,53 L45,62 L39,53 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,67 L51,76 L45,85 L39,76 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,90 L51,99 L45,108 L39,99 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M27,32.5 L33,41.5 L27,50.5 L21,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,55.5 L33,64.5 L27,73.5 L21,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,78.5 L33,87.5 L27,96.5 L21,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M63,32.5 L69,41.5 L63,50.5 L57,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,55.5 L69,64.5 L63,73.5 L57,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,78.5 L69,87.5 L63,96.5 L57,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <!-- Border pattern -->
+                            <rect x="12" y="12" width="66" height="102" rx="2" fill="none" stroke="#3498db" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div id="spaceCard1Text" class="help-text">Ready to start</div>
+                </div>
+                <div>
+                    <div class="card" id="spaceCard2">
+                        <svg width="100%" height="100%" viewBox="0 0 90 126" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="90" height="126" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                            <rect x="5" y="5" width="80" height="116" rx="4" fill="#3498db"/>
+                            <rect x="8" y="8" width="74" height="110" rx="3" fill="#154360"/>
+                            
+                            <!-- Card back pattern - centered vertically -->
+                            <path d="M45,21 L51,30 L45,39 L39,30 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,44 L51,53 L45,62 L39,53 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,67 L51,76 L45,85 L39,76 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M45,90 L51,99 L45,108 L39,99 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M27,32.5 L33,41.5 L27,50.5 L21,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,55.5 L33,64.5 L27,73.5 L21,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M27,78.5 L33,87.5 L27,96.5 L21,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <path d="M63,32.5 L69,41.5 L63,50.5 L57,41.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,55.5 L69,64.5 L63,73.5 L57,64.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            <path d="M63,78.5 L69,87.5 L63,96.5 L57,87.5 Z" fill="#3498db" stroke="#3498db" stroke-width="1"/>
+                            
+                            <!-- Border pattern -->
+                            <rect x="12" y="12" width="66" height="102" rx="2" fill="none" stroke="#3498db" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div id="spaceCard2Text" class="help-text">Ready to start</div>
+                </div>
+            </div>
+            
+            <div class="question">How many cards to reach the second card?</div>
+            
+            <div class="number-buttons">
+                <button class="number-button" data-value="1">1</button>
+                <button class="number-button" data-value="2">2</button>
+                <button class="number-button" data-value="3">3</button>
+                <button class="number-button" data-value="4">4</button>
+                <button class="number-button" data-value="5">5</button>
+                <button class="number-button" data-value="6">6</button>
+                <button class="number-button" data-value="7">7</button>
+                <button class="number-button" data-value="8">8</button>
+                <button class="number-button" data-value="9">9</button>
+                <button class="number-button" data-value="10">10</button>
+            </div>
+            
+            <div class="result" id="spaceResult"></div>
+        </div>
+        
+        <!-- Stack Order -->
+        <div class="quiz-container hidden" id="stackQuiz">
+            <div class="question">Mnemonica Stack Order (Tamariz)</div>
+            
+            <div class="stack-list" id="stackList">
+                <!-- Stack list will be generated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="currentStreak">0</div>
+                <div class="stat-label">Current Streak</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="longestStreak">0</div>
+                <div class="stat-label">Longest Streak</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalTrials">0</div>
+                <div class="stat-label">Total Trials</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mnemonica Stack (Tamariz Stack)
+        const mnemonicaStack = [
+            { position: 1, value: '4', suit: 'c', name: '4 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 2, value: '2', suit: 'h', name: '2 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 3, value: '7', suit: 'd', name: '7 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 4, value: '3', suit: 'c', name: '3 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 5, value: '4', suit: 'h', name: '4 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 6, value: '6', suit: 'd', name: '6 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 7, value: 'A', suit: 's', name: 'Ace of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 8, value: '5', suit: 'h', name: '5 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 9, value: '9', suit: 's', name: '9 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 10, value: '2', suit: 's', name: '2 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 11, value: 'Q', suit: 'h', name: 'Queen of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 12, value: '3', suit: 'd', name: '3 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 13, value: 'Q', suit: 'c', name: 'Queen of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 14, value: '8', suit: 'h', name: '8 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 15, value: '6', suit: 's', name: '6 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 16, value: '5', suit: 's', name: '5 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 17, value: '9', suit: 'h', name: '9 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 18, value: 'K', suit: 'c', name: 'King of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 19, value: '2', suit: 'd', name: '2 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 20, value: 'J', suit: 'h', name: 'Jack of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 21, value: '3', suit: 's', name: '3 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 22, value: '8', suit: 's', name: '8 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 23, value: '6', suit: 'h', name: '6 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 24, value: '10', suit: 'c', name: '10 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 25, value: '5', suit: 'd', name: '5 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 26, value: 'K', suit: 'd', name: 'King of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 27, value: '2', suit: 'c', name: '2 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 28, value: '3', suit: 'h', name: '3 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 29, value: '8', suit: 'd', name: '8 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 30, value: '5', suit: 'c', name: '5 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 31, value: 'K', suit: 's', name: 'King of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 32, value: 'J', suit: 'd', name: 'Jack of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 33, value: '8', suit: 'c', name: '8 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 34, value: '10', suit: 's', name: '10 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 35, value: 'K', suit: 'h', name: 'King of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 36, value: 'J', suit: 'c', name: 'Jack of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 37, value: '7', suit: 's', name: '7 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 38, value: '10', suit: 'h', name: '10 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 39, value: 'A', suit: 'd', name: 'Ace of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 40, value: '4', suit: 's', name: '4 of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 41, value: '7', suit: 'h', name: '7 of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 42, value: '4', suit: 'd', name: '4 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 43, value: 'A', suit: 'c', name: 'Ace of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 44, value: '9', suit: 'c', name: '9 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 45, value: 'J', suit: 's', name: 'Jack of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 46, value: 'Q', suit: 'd', name: 'Queen of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 47, value: '7', suit: 'c', name: '7 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 48, value: 'Q', suit: 's', name: 'Queen of Spades', image: '/api/placeholder/90/126', isRed: false },
+            { position: 49, value: '10', suit: 'd', name: '10 of Diamonds', image: '/api/placeholder/90/126', isRed: true },
+            { position: 50, value: '6', suit: 'c', name: '6 of Clubs', image: '/api/placeholder/90/126', isRed: false },
+            { position: 51, value: 'A', suit: 'h', name: 'Ace of Hearts', image: '/api/placeholder/90/126', isRed: true },
+            { position: 52, value: '9', suit: 'd', name: '9 of Diamonds', image: '/api/placeholder/90/126', isRed: true }
+        ];
+        
+        // Card images (using SVG placeholders for now)
+        function getCardImageSVG(card) {
+            const suitSymbols = {
+                'h': '♥',
+                'd': '♦',
+                'c': '♣',
+                's': '♠'
+            };
+            
+            const suitColors = {
+                'h': '#e74c3c',
+                'd': '#e74c3c',
+                'c': '#2c3e50',
+                's': '#2c3e50'
+            };
+            
+            return `<svg width="100%" height="100%" viewBox="0 0 90 126" xmlns="http://www.w3.org/2000/svg">
+                <rect width="90" height="126" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                <text x="8" y="25" font-size="20" fill="${suitColors[card.suit]}">${card.value}</text>
+                <text x="8" y="45" font-size="20" fill="${suitColors[card.suit]}">${suitSymbols[card.suit]}</text>
+                <text x="45" y="75" font-size="35" text-anchor="middle" fill="${suitColors[card.suit]}">${suitSymbols[card.suit]}</text>
+                <text x="82" y="101" font-size="20" text-anchor="end" fill="${suitColors[card.suit]}">${card.value}</text>
+                <text x="82" y="121" font-size="20" text-anchor="end" fill="${suitColors[card.suit]}">${suitSymbols[card.suit]}</text>
+            </svg>`;
+        }
+        
+        // DOM Elements
+        const acaanQuiz = document.getElementById('acaanQuiz');
+        const spaceQuiz = document.getElementById('spaceQuiz');
+        const stackQuiz = document.getElementById('stackQuiz');
+        const tabs = document.querySelectorAll('.tab');
+        const startBtn = document.getElementById('startBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const difficultyLevel = document.getElementById('difficultyLevel');
+        const spaceRange = document.getElementById('spaceRange');
+        const stackList = document.getElementById('stackList');
+        
+        // Timer Elements
+        const acaanTimerContainer = document.getElementById('acaanTimerContainer');
+        const acaanTimerText = document.getElementById('acaanTimerText');
+        const acaanTimerBar = document.getElementById('acaanTimerBar');
+        const spaceTimerContainer = document.getElementById('spaceTimerContainer');
+        const spaceTimerText = document.getElementById('spaceTimerText');
+        const spaceTimerBar = document.getElementById('spaceTimerBar');
+        
+        // ACAAN Quiz Elements
+        const acaanCard = document.getElementById('acaanCard');
+        const acaanCardText = document.getElementById('acaanCardText');
+        const acaanNumber = document.getElementById('acaanNumber');
+        const acaanOptions = document.getElementById('acaanOptions');
+        const acaanResult = document.getElementById('acaanResult');
+        
+        // Space Quiz Elements
+        const spaceCard1 = document.getElementById('spaceCard1');
+        const spaceCard2 = document.getElementById('spaceCard2');
+        const spaceCard1Text = document.getElementById('spaceCard1Text');
+        const spaceCard2Text = document.getElementById('spaceCard2Text');
+        const numberButtons = document.querySelectorAll('.number-button');
+        const spaceResult = document.getElementById('spaceResult');
+        
+        // Stats Elements
+        const currentStreakEl = document.getElementById('currentStreak');
+        const longestStreakEl = document.getElementById('longestStreak');
+        const accuracyEl = document.getElementById('accuracy');
+        const totalTrialsEl = document.getElementById('totalTrials');
+        
+        // Game state
+        let currentQuiz = 'acaan';
+        let gameActive = false;
+        let correctAnswer = null;
+        let selectedAnswer = null;
+        let userAnswer = null;
+        let autoNextTimer = null;
+        let quizTimer = null;
+        let timeRemaining = 0;
+        let timerInterval = null;
+        let autoNextEnabled = true; // Default to enabled
+        let stats = {
+            trials: 0,
+            correct: 0,
+            currentStreak: 0,
+            longestStreak: 0
+        };
+        
+        // Event listeners
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                switchTab(tabName);
+            });
+        });
+        
+        startBtn.addEventListener('click', startNewGame);
+        settingsBtn.addEventListener('click', toggleSettings);
+        saveSettingsBtn.addEventListener('click', saveSettings);
+        
+        // Auto-Next button toggle
+        const autoNextBtn = document.getElementById('autoNextBtn');
+        autoNextBtn.addEventListener('click', () => {
+            autoNextEnabled = !autoNextEnabled;
+            updateAutoNextButton();
+        });
+        
+        function updateAutoNextButton() {
+            if (autoNextEnabled) {
+                autoNextBtn.classList.add('active');
+                autoNextBtn.classList.remove('inactive');
+            } else {
+                autoNextBtn.classList.remove('active');
+                autoNextBtn.classList.add('inactive');
+            }
+        }
+        
+        // ACAAN Event Listeners
+        acaanOptions.addEventListener('click', (e) => {
+            const option = e.target.closest('.option');
+            if (option && gameActive) {
+                selectedAnswer = parseInt(option.dataset.index);
+                checkAnswer();
+            }
+        });
+        
+        // Space Event Listeners
+        numberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (gameActive) {
+                    userAnswer = parseInt(button.dataset.value);
+                    checkAnswer();
+                }
+            });
+        });
+        
+        // Keyboard events for Space Quiz
+        document.addEventListener('keydown', (e) => {
+            // Only handle number keys 1-9 if Space Quiz is active and game is active
+            if (currentQuiz === 'space' && gameActive && e.key >= '1' && e.key <= '9') {
+                userAnswer = parseInt(e.key);
+                checkAnswer();
+            }
+        });
+        
+        // Functions
+        function switchTab(tabName) {
+            // Update active tab
+            tabs.forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Hide all quiz containers
+            acaanQuiz.classList.add('hidden');
+            spaceQuiz.classList.add('hidden');
+            stackQuiz.classList.add('hidden');
+            
+            // Show the selected quiz
+            if (tabName === 'acaan') {
+                acaanQuiz.classList.remove('hidden');
+                currentQuiz = 'acaan';
+                startBtn.classList.remove('hidden');
+                settingsBtn.classList.remove('hidden');
+            } else if (tabName === 'space') {
+                spaceQuiz.classList.remove('hidden');
+                currentQuiz = 'space';
+                startBtn.classList.remove('hidden');
+                settingsBtn.classList.remove('hidden');
+            } else if (tabName === 'stack') {
+                stackQuiz.classList.remove('hidden');
+                currentQuiz = 'stack';
+                startBtn.classList.add('hidden');
+                settingsBtn.classList.add('hidden');
+                displayStackOrder();
+            }
+            
+            // Reset game state if switching to a quiz tab
+            if (tabName === 'acaan' || tabName === 'space') {
+                resetGame();
+            }
+        }
+        
+        function resetGame() {
+            gameActive = false;
+            correctAnswer = null;
+            selectedAnswer = null;
+            userAnswer = null;
+            
+            // Clear any timers
+            if (autoNextTimer) {
+                clearTimeout(autoNextTimer);
+                autoNextTimer = null;
+            }
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Hide timers
+            acaanTimerContainer.classList.add('hidden');
+            spaceTimerContainer.classList.add('hidden');
+            
+            // Reset ACAAN
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                option.textContent = 'Option ' + (parseInt(option.dataset.index) + 1);
+            });
+            acaanResult.textContent = '';
+            
+            // Reset Space
+            spaceResult.textContent = '';
+        }
+        
+        function startNewGame() {
+            resetGame();
+            gameActive = true;
+            
+            if (currentQuiz === 'acaan') {
+                startAcaanGame();
+                startTimer('acaan');
+            } else if (currentQuiz === 'space') {
+                startSpaceGame();
+                startTimer('space');
+            }
+        }
+        
+        function startTimer(quizType) {
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Get difficulty settings
+            const difficulty = difficultyLevel.value;
+            
+            // Only start timer for medium, hard, and expert difficulties
+            if (difficulty === 'easy') {
+                if (quizType === 'acaan') {
+                    acaanTimerContainer.classList.add('hidden');
+                } else {
+                    spaceTimerContainer.classList.add('hidden');
+                }
+                return;
+            }
+            
+            // Set time based on difficulty
+            if (difficulty === 'medium') {
+                timeRemaining = 20;
+            } else if (difficulty === 'hard') {
+                timeRemaining = 10;
+            } else if (difficulty === 'expert') {
+                timeRemaining = 5;
+            }
+            
+            // Reset timer bar class
+            if (quizType === 'acaan') {
+                acaanTimerBar.classList.remove('low-time');
+            } else {
+                spaceTimerBar.classList.remove('low-time');
+            }
+            
+            // Show timer container
+            if (quizType === 'acaan') {
+                acaanTimerContainer.classList.remove('hidden');
+                acaanTimerText.textContent = timeRemaining;
+                acaanTimerBar.style.width = '100%';
+            } else {
+                spaceTimerContainer.classList.remove('hidden');
+                spaceTimerText.textContent = timeRemaining;
+                spaceTimerBar.style.width = '100%';
+            }
+            
+            // Start the timer
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                
+                // Update timer display
+                if (quizType === 'acaan') {
+                    acaanTimerText.textContent = timeRemaining;
+                    
+                    let maxTime = 20;
+                    if (difficulty === 'hard') maxTime = 10;
+                    if (difficulty === 'expert') maxTime = 5;
+                    
+                    acaanTimerBar.style.width = (timeRemaining * 100 / maxTime) + '%';
+                    
+                    // Change color when time is low
+                    if (timeRemaining <= 3) {
+                        acaanTimerBar.classList.add('low-time');
+                    }
+                } else {
+                    spaceTimerText.textContent = timeRemaining;
+                    
+                    let maxTime = 20;
+                    if (difficulty === 'hard') maxTime = 10;
+                    if (difficulty === 'expert') maxTime = 5;
+                    
+                    spaceTimerBar.style.width = (timeRemaining * 100 / maxTime) + '%';
+                    
+                    // Change color when time is low
+                    if (timeRemaining <= 3) {
+                        spaceTimerBar.classList.add('low-time');
+                    }
+                }
+                
+                // Time's up
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    
+                    // Handle timeout
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+        
+        function handleTimeout() {
+            if (!gameActive) return;
+            
+            gameActive = false;
+            
+            // Show correct answer
+            if (currentQuiz === 'acaan') {
+                const options = document.querySelectorAll('.option');
+                options[correctAnswer].classList.add('correct');
+                
+                acaanResult.textContent = 'Time\'s up! The correct answer is shown.';
+                acaanResult.className = 'result incorrect-message';
+            } else if (currentQuiz === 'space') {
+                spaceResult.textContent = `Time's up! The correct answer is ${correctAnswer} card${correctAnswer === 1 ? '' : 's'}.`;
+                spaceResult.className = 'result incorrect-message';
+            }
+            
+            // Update stats (count as incorrect)
+            stats.trials++;
+            stats.currentStreak = 0;
+            updateStats();
+            
+            // Enable new game button
+            startBtn.disabled = false;
+            
+            // Set auto-next timer if enabled
+            if (autoNextEnabled) {
+                // Clear any existing timer
+                if (autoNextTimer) {
+                    clearTimeout(autoNextTimer);
+                }
+                
+                // Set new timer
+                const delay = (parseInt(document.getElementById('autoNextDelay').value) || 2) * 1000;
+                autoNextTimer = setTimeout(() => {
+                    startNewGame();
+                }, delay);
+            }
+        }
+        
+        function startAcaanGame() {
+            // Generate random card and position
+            let randomCardIndex = Math.floor(Math.random() * 52);
+            let randomCard = mnemonicaStack[randomCardIndex];
+            
+            // Generate random position (1-52)
+            let randomPosition = Math.floor(Math.random() * 52) + 1;
+            
+            // Calculate the correct card to cut to for ACAAN
+            // For ACAAN to work, we need to cut at the card that will put our target card at the target position
+            correctAnswer = (randomCardIndex - randomPosition + 53) % 52;
+            if (correctAnswer === 0) correctAnswer = 52;
+            
+            // Generate 3 wrong options
+            let options = [correctAnswer];
+            while (options.length < 4) {
+                let wrongOption = Math.floor(Math.random() * 52) + 1;
+                if (!options.includes(wrongOption)) {
+                    options.push(wrongOption);
+                }
+            }
+            
+            // Shuffle options
+            options = options.sort(() => Math.random() - 0.5);
+            
+            // Update the correct answer index
+            correctAnswer = options.indexOf(correctAnswer);
+            
+            // Update UI
+            acaanCard.innerHTML = getCardImageSVG(randomCard);
+            
+            if (randomCard.isRed) {
+                acaanCard.classList.add('red');
+            } else {
+                acaanCard.classList.remove('red');
+            }
+            
+            acaanCardText.textContent = randomCard.name;
+            acaanNumber.textContent = randomPosition;
+            
+            // Update options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach((option, index) => {
+                const cardIndex = options[index] - 1;
+                const card = mnemonicaStack[cardIndex];
+                option.textContent = card.name;
+            });
+        }
+        
+        function startSpaceGame() {
+            const maxSpace = parseInt(spaceRange.value) || 10;
+            
+            // Pick two cards that are within the range (lower one first)
+            let firstCardIndex, secondCardIndex;
+            
+            // Select first card (avoiding last few positions to ensure we can find a valid second card)
+            firstCardIndex = Math.floor(Math.random() * (52 - maxSpace));
+            
+            // Select second card that is within the range but higher than first
+            const maxSecondIndex = Math.min(firstCardIndex + maxSpace, 51);
+            secondCardIndex = firstCardIndex + 1 + Math.floor(Math.random() * (maxSecondIndex - firstCardIndex));
+            
+            const firstCard = mnemonicaStack[firstCardIndex];
+            const secondCard = mnemonicaStack[secondCardIndex];
+            
+            // Calculate correct answer (cards to second card, NOT between them)
+            correctAnswer = secondCardIndex - firstCardIndex;
+            
+            // Update UI
+            spaceCard1.innerHTML = getCardImageSVG(firstCard);
+            spaceCard2.innerHTML = getCardImageSVG(secondCard);
+            
+            if (firstCard.isRed) {
+                spaceCard1.classList.add('red');
+            } else {
+                spaceCard1.classList.remove('red');
+            }
+            
+            if (secondCard.isRed) {
+                spaceCard2.classList.add('red');
+            } else {
+                spaceCard2.classList.remove('red');
+            }
+            
+            spaceCard1Text.textContent = firstCard.name;
+            spaceCard2Text.textContent = secondCard.name;
+            
+            // Enable number buttons
+            numberButtons.forEach(btn => btn.disabled = false);
+        }
+        
+        function checkAnswer() {
+            if (!gameActive) return;
+            
+            gameActive = false;
+            
+            // Stop any active timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            let isCorrect = false;
+            
+            if (currentQuiz === 'acaan') {
+                isCorrect = selectedAnswer === correctAnswer;
+                
+                // Show correct/incorrect
+                const options = document.querySelectorAll('.option');
+                options[correctAnswer].classList.add('correct');
+                
+                if (!isCorrect && selectedAnswer !== null) {
+                    options[selectedAnswer].classList.add('incorrect');
+                }
+                
+                acaanResult.textContent = isCorrect ? 
+                    'Correct! Great job!' : 
+                    'Incorrect. The correct answer is shown.';
+                acaanResult.className = isCorrect ? 'result correct-message' : 'result incorrect-message';
+                
+            } else if (currentQuiz === 'space') {
+                isCorrect = userAnswer === correctAnswer;
+                
+                spaceResult.textContent = isCorrect ? 
+                    `Correct! There ${correctAnswer === 1 ? 'is' : 'are'} ${correctAnswer} card${correctAnswer === 1 ? '' : 's'} to the second card.` : 
+                    `Incorrect. There ${correctAnswer === 1 ? 'is' : 'are'} ${correctAnswer} card${correctAnswer === 1 ? '' : 's'} to the second card.`;
+                spaceResult.className = isCorrect ? 'result correct-message' : 'result incorrect-message';
+            }
+            
+            // Update stats
+            stats.trials++;
+            if (isCorrect) {
+                stats.correct++;
+                stats.currentStreak++;
+                if (stats.currentStreak > stats.longestStreak) {
+                    stats.longestStreak = stats.currentStreak;
+                }
+            } else {
+                stats.currentStreak = 0;
+            }
+            
+            updateStats();
+            
+            // Enable new game button
+            startBtn.disabled = false;
+            
+            // Set auto-next timer if enabled
+            if (autoNextEnabled) {
+                // Clear any existing timer
+                if (autoNextTimer) {
+                    clearTimeout(autoNextTimer);
+                }
+                
+                // Set new timer
+                const delay = (parseInt(document.getElementById('autoNextDelay').value) || 2) * 1000;
+                autoNextTimer = setTimeout(() => {
+                    startNewGame();
+                }, delay);
+            }
+        }
+        
+        function toggleSettings() {
+            settingsPanel.classList.toggle('hidden');
+        }
+        
+        function saveSettings() {
+            settingsPanel.classList.add('hidden');
+        }
+        
+        function updateStats() {
+            currentStreakEl.textContent = stats.currentStreak;
+            longestStreakEl.textContent = stats.longestStreak;
+            accuracyEl.textContent = stats.trials > 0 ? 
+                Math.round((stats.correct / stats.trials) * 100) + '%' : '0%';
+            totalTrialsEl.textContent = stats.trials;
+        }
+        
+        function displayStackOrder() {
+            // Clear any existing content
+            stackList.innerHTML = '';
+            
+            // Add each card to the list
+            mnemonicaStack.forEach(card => {
+                const item = document.createElement('div');
+                item.className = 'stack-item';
+                
+                const position = document.createElement('div');
+                position.className = 'stack-position';
+                position.textContent = card.position;
+                
+                const cardEl = document.createElement('div');
+                cardEl.className = 'stack-card';
+                
+                // Create card value (just the value/letter)
+                const cardValue = document.createElement('span');
+                cardValue.textContent = card.value;
+                
+                // Create card suit symbol
+                const cardSymbol = document.createElement('span');
+                cardSymbol.className = card.isRed ? 'card-mini red' : 'card-mini';
+                cardSymbol.textContent = getSuitSymbol(card.suit);
+                
+                // Add elements to the item
+                cardEl.appendChild(cardValue);
+                cardEl.appendChild(cardSymbol);
+                
+                item.appendChild(position);
+                item.appendChild(cardEl);
+                
+                stackList.appendChild(item);
+            });
+        }
+        
+        function getSuitSymbol(suit) {
+            switch(suit) {
+                case 'h': return '♥';
+                case 'd': return '♦';
+                case 'c': return '♣';
+                case 's': return '♠';
+                default: return '';
+            }
+        }
+        
+        // Initialize settings
+        const autoNextCheckbox = document.getElementById('autoNextEnabled');
+        const autoNextDelay = document.getElementById('autoNextDelay');
+        
+        // Initialize settings and autoNext button
+        function initializeApp() {
+            // Disable number buttons initially
+            numberButtons.forEach(button => {
+                button.disabled = true;
+            });
+            
+            // Set initial state for autoNext button
+            updateAutoNextButton();
+            
+            // Display stack order if that tab is active
+            if (currentQuiz === 'stack') {
+                displayStackOrder();
+            }
+        }
+        
+        // Call initialize function
+        initializeApp();
+    </script>
+</body>
+</html>
