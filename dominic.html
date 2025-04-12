@@ -702,6 +702,8 @@
         
         function saveSettings() {
             settingsPanel.classList.add('hidden');
+             // Save the settings to localStorage
+            saveUserSettings();
             // Focus back on the start button
             startBtn.focus();
         }
@@ -726,10 +728,51 @@
         function isIOS() {
             return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         }
+
+        // Save settings to localStorage
+        function saveUserSettings() {
+            try {
+                const settings = {
+                    difficulty: difficultyLevel.value,
+                    customLength: customLength.value,
+                    displayTime: displayTime.value,
+                    groupingMethod: groupDigits.value
+                };
+                localStorage.setItem('numberMemorySettings', JSON.stringify(settings));
+                console.log('Settings saved successfully');
+            } catch (error) {
+                console.log('Unable to save settings: localStorage may not be available');
+            }
+        }
         
+        // Load settings from localStorage
+        function loadSavedSettings() {
+            try {
+                const savedSettings = localStorage.getItem('numberMemorySettings');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    
+                    // Apply saved settings to UI
+                    difficultyLevel.value = settings.difficulty || 'medium';
+                    customLength.value = settings.customLength || 10;
+                    displayTime.value = settings.displayTime || 5;
+                    groupDigits.value = settings.groupingMethod || 'pairs';
+                    
+                    // Show/hide custom settings based on difficulty
+                    toggleCustomDifficulty();
+                    
+                    console.log('Settings loaded successfully');
+                }
+            } catch (error) {
+                console.log('Unable to load saved settings: localStorage may not be available');
+                // Continue with default settings
+            }
+        }
+                
         // Initialize
         toggleCustomDifficulty();
         loadSavedStats();
+        loadSavedSettings();
         adjustForOrientation();
         
         // Prevent zoom on double tap for iOS
