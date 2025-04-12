@@ -1377,7 +1377,38 @@
         }
         
         function saveSettings() {
+            // Hide the settings panel
             settingsPanel.classList.add('hidden');
+            
+            // Save settings to localStorage
+            const settings = {
+                difficultyLevel: difficultyLevel.value,
+                spaceRange: spaceRange.value,
+                autoNextDelay: autoNextDelay.value,
+                autoNextEnabled: autoNextEnabled
+            };
+            
+            localStorage.setItem('mnemonicaSettings', JSON.stringify(settings));
+        }
+        
+        function loadSettings() {
+            // Get settings from localStorage
+            const savedSettings = localStorage.getItem('mnemonicaSettings');
+            
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                
+                // Apply saved settings to UI elements
+                if (settings.difficultyLevel) difficultyLevel.value = settings.difficultyLevel;
+                if (settings.spaceRange) spaceRange.value = settings.spaceRange;
+                if (settings.autoNextDelay) autoNextDelay.value = settings.autoNextDelay;
+                
+                // Set auto-next toggle state
+                if (settings.autoNextEnabled !== undefined) {
+                    autoNextEnabled = settings.autoNextEnabled;
+                    updateAutoNextButton();
+                }
+            }
         }
         
         function updateStats() {
@@ -1440,6 +1471,9 @@
         
         // Initialize settings and autoNext button
         function initializeApp() {
+            // Load saved settings
+            loadSettings();
+            
             // Disable number buttons initially
             numberButtons.forEach(button => {
                 button.disabled = true;
